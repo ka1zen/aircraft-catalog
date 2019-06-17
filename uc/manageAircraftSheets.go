@@ -20,6 +20,11 @@ func (cl *coreLogic) UpdateAircraftSheet(sheet *domain.AircraftSheet) (int, erro
 	return cl.AircraftSheetProvider.Update(sheet)
 }
 
+// GET /aircraft/:id
+func (cl *coreLogic) GetAircraftDetails(ID int) *domain.AircraftSheet {
+	return cl.AircraftSheetProvider.FindByID(ID)
+}
+
 //
 //// DELETE /aircraft/:id
 //func RemoveCatalog(*AirCraft) (AirCrafts.ID, error) {

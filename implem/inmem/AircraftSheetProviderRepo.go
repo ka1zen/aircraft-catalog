@@ -55,6 +55,10 @@ func (asp *AircraftSheetProviderRepo) FindByName(name string) []*domain.Aircraft
 	return results
 }
 
+func (asp *AircraftSheetProviderRepo) Remove(ID int) error {
+	panic("implem me")
+}
+
 func (asp *AircraftSheetProviderRepo) Add(sheet *domain.AircraftSheet) *AircraftSheetProviderRepo {
 	*asp = append(*asp, sheet)
 	return asp

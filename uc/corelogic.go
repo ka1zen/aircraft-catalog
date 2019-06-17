@@ -12,6 +12,7 @@ type AircraftSheetProvider interface {
 	FindAll() []*domain.AircraftSheet
 	Store(*domain.AircraftSheet) (int, error)
 	Update(AircraftSheets *domain.AircraftSheet) (int, error)
+	Remove(ID int) error
 }
 
 func NewCoreLogic(AircraftSheetProvider AircraftSheetProvider) *coreLogic {
