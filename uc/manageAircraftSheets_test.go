@@ -93,3 +93,24 @@ func TestCoreLogic_GetAircraftDetails(t *testing.T) {
 		assert.Nil(t, got)
 	})
 }
+
+func TestCoreLogic_RemoveAircraftSheet(t *testing.T) {
+	repo := inmem.NewAircraftSheetProviderRepo().Add(domain.NewAircraftSheet(
+		0, "", "", "", "", "", "", "Aero Boero AB-95/115/150/180", "", "", "",
+	)).Add(domain.NewAircraftSheet(
+		1, "", "", "", "", "", "", "Aeronca 11 Chief", "", "", "",
+	))
+
+	t.Run("should return error if id not existing", func(t *testing.T) {
+		err := uc.NewCoreLogic(repo).RemoveAircraftSheet(5)
+		assert.Error(t, err)
+		assert.Len(t, *repo, 2)
+	})
+
+	t.Run("should return no error", func(t *testing.T) {
+		err := uc.NewCoreLogic(repo).RemoveAircraftSheet(1)
+		assert.Nil(t, repo.FindByID(1))
+		assert.Len(t, *repo, 1)
+		assert.NoError(t, err)
+	})
+}

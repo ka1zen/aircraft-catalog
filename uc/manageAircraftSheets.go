@@ -25,8 +25,7 @@ func (cl *coreLogic) GetAircraftDetails(ID int) *domain.AircraftSheet {
 	return cl.AircraftSheetProvider.FindByID(ID)
 }
 
-//
-//// DELETE /aircraft/:id
-//func RemoveCatalog(*AirCraft) (AirCrafts.ID, error) {
-//
-//}
+// DELETE /aircraft/:id
+func (cl *coreLogic) RemoveAircraftSheet(ID int) error {
+	return cl.AircraftSheetProvider.Remove(ID)
+}
