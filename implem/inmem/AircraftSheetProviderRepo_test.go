@@ -79,9 +79,6 @@ func Test_AircraftSheetProviderRepo_Store(t *testing.T) {
 	})
 
 	t.Run("should return the incremented id of the added aircraftSheet", func(t *testing.T) {
-		asp.Add(domain.NewAircraftSheet(
-			0, "", "", "", "", "", "", "Aero Boero AB-95/115/150/180", "", "", "",
-		))
 		actualID, _ := asp.Store(domain.NewAircraftSheet(
 			0, "", "", "", "", "", "", "Aeronca 11 Chief", "", "", "",
 		))
