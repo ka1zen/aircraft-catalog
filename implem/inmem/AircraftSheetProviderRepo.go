@@ -18,7 +18,7 @@ func (asp *AircraftSheetProviderRepo) FindByID(ID int) *domain.AircraftSheet {
 }
 
 func (asp *AircraftSheetProviderRepo) FindAll() []*domain.AircraftSheet {
-	panic("implement me")
+	return *asp
 }
 
 func (asp *AircraftSheetProviderRepo) Store(domain.AircraftSheet) (int, error) {

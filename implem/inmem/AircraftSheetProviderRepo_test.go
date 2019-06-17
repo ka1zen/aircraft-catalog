@@ -50,3 +50,20 @@ func Test_AircraftSheetProviderRepo_FindByID(t *testing.T) {
 		assert.Nil(t, asp.FindByID(ID))
 	})
 }
+
+func Test_AircraftSheetProviderRepo_FindAll(t *testing.T) {
+	asp := inmem.NewAircraftSheetProviderRepo()
+	t.Run("should return no aircraftSheet", func(t *testing.T) {
+		assert.Len(t, asp.FindAll(), 0)
+	})
+	t.Run("should return all AirCraftSheets", func(t *testing.T) {
+		asp.Add(domain.NewAircraftSheet(
+			0, "", "", "", "", "", "", "Aero Boero AB-95/115/150/180", "", "", "",
+		)).Add(domain.NewAircraftSheet(
+			1, "", "", "", "", "", "", "Aeronca 11 Chief", "", "", "",
+		))
+
+		got := asp.FindAll()
+		assert.Len(t, got, 2)
+	})
+}
