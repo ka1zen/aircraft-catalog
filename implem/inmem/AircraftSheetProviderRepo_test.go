@@ -110,3 +110,24 @@ func Test_AircraftSheetProviderRepo_Update(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAircraftSheetProviderRepo_Remove(t *testing.T) {
+	asp := inmem.NewAircraftSheetProviderRepo().Add(domain.NewAircraftSheet(
+		0, "", "", "", "", "", "", "Aero Boero AB-95/115/150/180", "", "", "",
+	)).Add(domain.NewAircraftSheet(
+		1, "", "", "", "", "", "", "Aeronca 11 Chief", "", "", "",
+	))
+
+	t.Run("should return error if id not existing", func(t *testing.T) {
+		err := asp.Remove(5)
+		assert.Error(t, err)
+		assert.Len(t, *asp, 2)
+	})
+
+	t.Run("should return no error", func(t *testing.T) {
+		err := asp.Remove(1)
+		assert.Nil(t, asp.FindByID(1))
+		assert.Len(t, *asp, 1)
+		assert.NoError(t, err)
+	})
+}

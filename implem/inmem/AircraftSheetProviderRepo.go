@@ -56,7 +56,17 @@ func (asp *AircraftSheetProviderRepo) FindByName(name string) []*domain.Aircraft
 }
 
 func (asp *AircraftSheetProviderRepo) Remove(ID int) error {
-	panic("implem me")
+	if asp.FindByID(ID) == nil {
+		return fmt.Errorf("no id %d", ID)
+	}
+	newAsp := NewAircraftSheetProviderRepo()
+	for _, as := range *asp {
+		if as.ID != ID {
+			*newAsp = append(*newAsp, as)
+		}
+	}
+	*asp = *newAsp
+	return nil
 }
 
 func (asp *AircraftSheetProviderRepo) Add(sheet *domain.AircraftSheet) *AircraftSheetProviderRepo {
