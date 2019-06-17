@@ -89,3 +89,27 @@ func Test_AircraftSheetProviderRepo_Store(t *testing.T) {
 		assert.Equal(t, 1, actualID)
 	})
 }
+
+func Test_AircraftSheetProviderRepo_Update(t *testing.T) {
+	asp := inmem.NewAircraftSheetProviderRepo().
+		Add(domain.NewAircraftSheet(
+			0, "", "", "", "", "", "", "Aeronca 11 Chief", "", "", "")).
+		Add(domain.NewAircraftSheet(
+			1, "", "", "", "", "", "", "Aeronca 22", "", "", ""))
+
+	t.Run("should return the id of the updated aircraftSheet", func(t *testing.T) {
+		actualID, err := asp.Update(domain.NewAircraftSheet(
+			1, "", "", "", "", "", "", "UPDATED", "", "", "",
+		))
+		assert.NoError(t, err)
+		assert.Equal(t, 1, actualID)
+		assert.Equal(t, "UPDATED", asp.FindByID(actualID).Name)
+	})
+
+	t.Run("should return error if the id does not exist", func(t *testing.T) {
+		_, err := asp.Update(domain.NewAircraftSheet(
+			5, "", "", "", "", "", "", "WRONG_ID", "", "", "",
+		))
+		assert.Error(t, err)
+	})
+}

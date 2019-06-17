@@ -24,13 +24,18 @@ func (asp *AircraftSheetProviderRepo) FindAll() []*domain.AircraftSheet {
 
 func (asp *AircraftSheetProviderRepo) Store(aircraftSheet *domain.AircraftSheet) (int, error) {
 	aircraftSheet.ID = len(*asp)
-	fmt.Println(aircraftSheet.ID)
 	*asp = append(*asp, aircraftSheet)
 	return aircraftSheet.ID, nil
 }
 
-func (asp *AircraftSheetProviderRepo) Update(aircraftSheets *domain.AircraftSheet) (int, error) {
-	panic("implement me")
+func (asp *AircraftSheetProviderRepo) Update(as *domain.AircraftSheet) (int, error) {
+	for i, aircraftSheet := range *asp {
+		if aircraftSheet.ID == as.ID {
+			(*asp)[i] = as
+			return as.ID, nil
+		}
+	}
+	return 0, fmt.Errorf("id %d not existing", as.ID)
 }
 
 func (asp *AircraftSheetProviderRepo) FindByName(name string) []*domain.AircraftSheet {
