@@ -38,13 +38,17 @@ func (asp *AircraftSheetProviderRepo) Update(as *domain.AircraftSheet) (int, err
 	return 0, fmt.Errorf("id %d not existing", as.ID)
 }
 
+func caseInsensitiveStringsMatchting(str1, str2 string) bool {
+	return strings.Contains(
+		strings.ToLower(str1),
+		strings.ToLower(str2),
+	)
+}
+
 func (asp *AircraftSheetProviderRepo) FindByName(name string) []*domain.AircraftSheet {
 	var results []*domain.AircraftSheet
 	for _, aircraftSheet := range *asp {
-		if strings.Contains(
-			strings.ToLower(aircraftSheet.Name),
-			strings.ToLower(name),
-		) {
+		if caseInsensitiveStringsMatchting(aircraftSheet.Name, name) {
 			results = append(results, aircraftSheet)
 		}
 	}
