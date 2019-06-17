@@ -9,7 +9,12 @@ import (
 type AircraftSheetProviderRepo []*domain.AircraftSheet
 
 func (asp *AircraftSheetProviderRepo) FindByID(ID int) *domain.AircraftSheet {
-	panic("implement me")
+	for _, aircraftSheet := range *asp {
+		if aircraftSheet.ID == ID {
+			return aircraftSheet
+		}
+	}
+	return nil
 }
 
 func (asp *AircraftSheetProviderRepo) FindAll() []*domain.AircraftSheet {
