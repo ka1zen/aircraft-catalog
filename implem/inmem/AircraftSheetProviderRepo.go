@@ -1,6 +1,7 @@
 package inmem
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/aircraft-catalog/domain"
@@ -21,11 +22,14 @@ func (asp *AircraftSheetProviderRepo) FindAll() []*domain.AircraftSheet {
 	return *asp
 }
 
-func (asp *AircraftSheetProviderRepo) Store(domain.AircraftSheet) (int, error) {
-	panic("implement me")
+func (asp *AircraftSheetProviderRepo) Store(aircraftSheet *domain.AircraftSheet) (int, error) {
+	aircraftSheet.ID = len(*asp)
+	fmt.Println(aircraftSheet.ID)
+	*asp = append(*asp, aircraftSheet)
+	return aircraftSheet.ID, nil
 }
 
-func (asp *AircraftSheetProviderRepo) Update(AircraftSheets *domain.AircraftSheet) (int, error) {
+func (asp *AircraftSheetProviderRepo) Update(aircraftSheets *domain.AircraftSheet) (int, error) {
 	panic("implement me")
 }
 

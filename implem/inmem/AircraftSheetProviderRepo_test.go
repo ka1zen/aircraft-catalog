@@ -67,3 +67,25 @@ func Test_AircraftSheetProviderRepo_FindAll(t *testing.T) {
 		assert.Len(t, got, 2)
 	})
 }
+
+func Test_AircraftSheetProviderRepo_Store(t *testing.T) {
+	asp := inmem.NewAircraftSheetProviderRepo()
+	t.Run("should return the id of the added aircraftSheet", func(t *testing.T) {
+		actualID, _ := asp.Store(domain.NewAircraftSheet(
+			0, "", "", "", "", "", "", "Aeronca 11 Chief", "", "", "",
+		))
+		assert.Len(t, *asp, 1)
+		assert.Equal(t, 0, actualID)
+	})
+
+	t.Run("should return the incremented id of the added aircraftSheet", func(t *testing.T) {
+		asp.Add(domain.NewAircraftSheet(
+			0, "", "", "", "", "", "", "Aero Boero AB-95/115/150/180", "", "", "",
+		))
+		actualID, _ := asp.Store(domain.NewAircraftSheet(
+			0, "", "", "", "", "", "", "Aeronca 11 Chief", "", "", "",
+		))
+		assert.Len(t, *asp, 2)
+		assert.Equal(t, 1, actualID)
+	})
+}
