@@ -16,9 +16,10 @@ func (cl *coreLogic) GetAircraftSheets() []*domain.AircraftSheet {
 }
 
 // PUT /aircraft
-//func (cl *coreLogic) UpdateCatalog(*AirCraft) (AirCrafts.ID, error) {
-//
-//}
+func (cl *coreLogic) UpdateAircraftSheet(sheet *domain.AircraftSheet) (int, error) {
+	return cl.AircraftSheetProvider.Update(sheet)
+}
+
 //
 //// DELETE /aircraft/:id
 //func RemoveCatalog(*AirCraft) (AirCrafts.ID, error) {
