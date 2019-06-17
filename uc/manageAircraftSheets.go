@@ -11,9 +11,9 @@ func (cl *coreLogic) GetAircraftSheetsByName(name string) []*domain.AircraftShee
 }
 
 // GET /aircrafts
-//func (cl *coreLogic) GetCatalogs() ([]*AirCraft, error) {
-//
-//}
+func (cl *coreLogic) GetAircraftSheets() []*domain.AircraftSheet {
+	return cl.AircraftSheetProvider.FindAll()
+}
 
 // PUT /aircraft
 //func (cl *coreLogic) UpdateCatalog(*AirCraft) (AirCrafts.ID, error) {
