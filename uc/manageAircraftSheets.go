@@ -6,7 +6,7 @@ import (
 
 // GET aircraft?name=a380
 // GET /autocomplete?name=asdfasdfsf
-func (cl *coreLogic) GetCatalogByName(name string) ([]*domain.AircraftSheet, error) {
+func (cl *coreLogic) GetAircraftSheetsByName(name string) []*domain.AircraftSheet {
 	return cl.AircraftSheetProvider.FindByName(name)
 }
 
